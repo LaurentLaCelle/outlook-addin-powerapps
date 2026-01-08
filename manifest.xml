@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" 
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+           xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" 
+           xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0" 
+           xsi:type="MailApp">
+  <Id>23c2402d-e555-4339-9a73-77b215192df7</Id>
+  <Version>1.0.0.2</Version>
+  <ProviderName>LM Tour Service</ProviderName>
+  <DefaultLocale>fr-FR</DefaultLocale>
+  <DisplayName DefaultValue="Hello from Outlook" />
+  <Description DefaultValue="Accès à la Power Apps Hello App"/>
+  
+  <IconUrl DefaultValue="https://laurentlacelle.github.io/outlook-addin-powerapps/assets/icon-32.png" />
+  <HighResolutionIconUrl DefaultValue="https://laurentlacelle.github.io/outlook-addin-powerapps/assets/icon-80.png" />
+  
+  <Hosts>
+    <Host Name="MailHost" />
+  </Hosts>
+  <Requirements>
+    <Sets>
+      <Set Name="Mailbox" MinVersion="1.1" />
+    </Sets>
+  </Requirements>
+  
+  <FormSettings>
+    <Form xsi:type="ItemRead">
+      <DesktopSettings>
+        <SourceLocation DefaultValue="https://laurentlacelle.github.io/outlook-addin-powerapps/taskpane.html" />
+        <RequestedHeight>450</RequestedHeight>
+      </DesktopSettings>
+    </Form>
+  </FormSettings>
+
+  <Permissions>ReadWriteItem</Permissions>
+  <Rule xsi:type="RuleCollection" Mode="And">
+    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read" />
+  </Rule>
+
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.0" xsi:type="VersionOverridesV1_0">
+    <Resources>
+      <bt:Images>
+        <bt:Image id="icon16" DefaultValue="https://laurentlacelle.github.io/outlook-addin-powerapps/assets/icon-16.png"/>
+        <bt:Image id="icon32" DefaultValue="https://laurentlacelle.github.io/outlook-addin-powerapps/assets/icon-32.png"/>
+        <bt:Image id="icon80" DefaultValue="https://laurentlacelle.github.io/outlook-addin-powerapps/assets/icon-80.png"/>
+      </bt:Images>
+      <bt:Urls>
+        <bt:Url id="functionFile" DefaultValue="https://laurentlacelle.github.io/outlook-addin-powerapps/commands.html"/>
+        <bt:Url id="taskpaneUrl" DefaultValue="https://laurentlacelle.github.io/outlook-addin-powerapps/taskpane.html"/>
+      </bt:Urls>
+      <bt:ShortStrings>
+        <bt:String id="groupLabel" DefaultValue="LM Tour"/>
+        <bt:String id="buttonLabel" DefaultValue="Ouvrir Hello App"/>
+      </bt:ShortStrings>
+      <bt:LongStrings>
+        <bt:String id="buttonToolTip" DefaultValue="Cliquer pour voir l'application Power Apps"/>
+      </bt:LongStrings>
+    </Resources>
+    <Hosts>
+      <Host xsi:type="MailHost">
+        <DesktopFormFactor>
+          <FunctionFile resid="functionFile" />
+          <ExtensionPoint xsi:type="MessageReadCommandSurface">
+            <OfficeTab id="TabDefault">
+              <Group id="msgReadGroup">
+                <Label resid="groupLabel" />
+                <Control xsi:type="Button" id="openTaskpaneButton">
+                  <Label resid="buttonLabel" />
+                  <Supertip>
+                    <Title resid="buttonLabel" />
+                    <Description resid="buttonToolTip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="icon16" />
+                    <bt:Image size="32" resid="icon32" />
+                    <bt:Image size="80" resid="icon80" />
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <SourceLocation resid="taskpaneUrl" />
+                  </Action>
+                </Control>
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+  </VersionOverrides>
+</OfficeApp>
